@@ -1,18 +1,25 @@
 #!/bin/bash
+# build_clang.sh
+# Matt Russell
 
-#gcc build
+# This script builds clang/clang++ on RHEL 7 which compiles / links code quickly. 
+# Expectation is that gcc / llvm are installed. 
+
+# TO BUILD GCC
+# dowload necessary files
 # configuration: $GCC_SRC_PATH/configure --prefix=$GCC_INSTALLPATH --enable-languages=c,c++ --disable-multilib
 # building:      make bootstrap-lean -> will remove old bootstrap parts as needed -> ~7gb->1.3gb
 # install:       make install 
+
 set -exv
 
 # location of gcc used to build clang
-HOST_GCC=/h/mrussell/gcc
+HOST_GCC=YOUR_GCC_INSTALL_PATH               # e.g. /h/mrussell/gcc
+LLVM_SOURCE_PATH=YOUR_LLVM_INSTALL_PATH      # e.g. /h/mrussell/llvm-source/llvm
+INSTALL_PREFIX=YOUR_INSTALL_LOCATION         # e.g. /h/mrussell/clang
 
 CC=${HOST_GCC}/bin/gcc
 CXX=${HOST_GCC}/bin/g++
-LLVM_SOURCE_PATH=/r/emotiondata/llvm-source/llvm
-INSTALL_PREFIX=/h/mrussell/clang 
 
 # number of cores
 CPUS=24
